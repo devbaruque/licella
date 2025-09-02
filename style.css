@@ -1,0 +1,226 @@
+/* Estilos personalizados para a aplicação Licella */
+
+/* Logo redonda */
+/* Logo redonda */
+.logo-round {
+    border-radius: 50%;
+    border: 3px solid #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.logo-round:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(255, 107, 138, 0.3);
+}
+
+/* Navegação */
+.nav-btn {
+    background-color: #f3f4f6;
+    color: #6b7280;
+    border: 2px solid transparent;
+}
+
+.nav-btn.active {
+    background: linear-gradient(135deg, #ff6b8a, #f093fb);
+    color: white;
+    border-color: #ff6b8a;
+}
+
+.nav-btn:hover:not(.active) {
+    background-color: #e5e7eb;
+    color: #374151;
+}
+
+/* Seções */
+.section {
+    display: none;
+}
+
+.section.active {
+    display: block;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Cards de insumos */
+.insumo-card {
+    background: linear-gradient(135deg, #ffffff, #f9fafb);
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 16px;
+    transition: all 0.3s ease;
+}
+
+.insumo-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Cards de produção */
+.producao-card {
+    background: linear-gradient(135deg, #fff7ed, #fef3c7);
+    border: 1px solid #f59e0b;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+}
+
+/* Inputs com foco */
+input:focus, select:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 107, 138, 0.1);
+}
+
+/* Permitir vírgula nos inputs numéricos */
+input[type="number"] {
+    /* Remover spinners para melhor UX */
+    -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Botões */
+button {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+button:hover {
+    transform: translateY(-1px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* Responsividade adicional */
+@media (max-width: 640px) {
+    .container {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+    
+    h1 {
+        font-size: 1.875rem !important;
+    }
+    
+    .nav-btn {
+        font-size: 0.875rem;
+        padding: 8px 12px;
+    }
+    
+    .logo-round {
+        width: 3rem !important;
+        height: 3rem !important;
+    }
+}
+
+/* Loading animation */
+.loading {
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Success animation */
+.success-animation {
+    animation: bounce 0.6s ease-in-out;
+}
+
+@keyframes bounce {
+    0%, 20%, 60%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    80% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Error styles */
+.error {
+    border-color: #ef4444 !important;
+    background-color: #fef2f2 !important;
+}
+
+.error-message {
+    color: #ef4444;
+    font-size: 0.875rem;
+    margin-top: 4px;
+}
+
+/* Success styles */
+.success {
+    border-color: #10b981 !important;
+    background-color: #f0fdf4 !important;
+}
+
+/* Tooltip styles */
+.tooltip {
+    position: relative;
+}
+
+.tooltip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #1f2937;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    z-index: 10;
+}
+
+.tooltip:hover::after {
+    opacity: 1;
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #ff6b8a, #f093fb);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #e11d48, #c084fc);
+}

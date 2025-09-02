@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Licella - Calculadora de Custos</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#ff6b8a',
+                        secondary: '#4c63b6',
+                        accent: '#f093fb'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gradient-to-br from-pink-50 to-purple-50 min-h-screen">
+    <div class="container mx-auto px-4 py-6 max-w-4xl">
+        <!-- Header -->
+        <header class="text-center mb-8">
+            <div class="flex items-center justify-center mb-4">
+                <img src="assets/logo.png" alt="Licella" class="logo-round h-16 w-16 mr-3 object-cover">
+                <h1 class="text-3xl md:text-4xl font-bold text-gray-800">Licella</h1>
+            </div>
+            <p class="text-gray-600 text-lg">Calculadora de Custos para Doces</p>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="flex flex-wrap justify-center mb-8 bg-white rounded-lg shadow-sm p-2">
+            <button id="nav-insumos" class="nav-btn active px-4 py-2 m-1 rounded-lg font-medium transition-all duration-200">
+                📦 Insumos
+            </button>
+            <button id="nav-producao" class="nav-btn px-4 py-2 m-1 rounded-lg font-medium transition-all duration-200">
+                🍰 Produção
+            </button>
+            <button id="nav-historico" class="nav-btn px-4 py-2 m-1 rounded-lg font-medium transition-all duration-200">
+                📊 Histórico
+            </button>
+        </nav>
+
+        <!-- Seção de Insumos -->
+        <section id="section-insumos" class="section active">
+            <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">📦 Cadastrar Insumos</h2>
+                
+                <form id="form-insumo" class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Nome do Insumo</label>
+                            <input type="text" id="nome-insumo" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Ex: Chocolate em pó" required>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Unidade</label>
+                            <select id="unidade-insumo" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                <option value="gramas">Gramas (g)</option>
+                                <option value="quilos">Quilos (kg)</option>
+                                <option value="unidades">Unidades</option>
+                                <option value="mililitros">Mililitros (ml)</option>
+                                <option value="litros">Litros (L)</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Quantidade Total</label>
+                            <input type="text" id="quantidade-total" pattern="[0-9]+([,.]?[0-9]*)*" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="500" required>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Valor Pago (R$)</label>
+                            <input type="text" id="valor-pago" pattern="[0-9]+([,.]?[0-9]*)*" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="15,90" required>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-gradient-to-r from-primary to-accent text-white font-bold py-3 px-6 rounded-lg hover:opacity-90 transition-opacity">
+                        ➕ Adicionar Insumo
+                    </button>
+                </form>
+            </div>
+
+            <!-- Lista de Insumos -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Insumos Cadastrados</h3>
+                <div id="lista-insumos" class="space-y-3">
+                    <!-- Insumos serão inseridos aqui via JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Produção -->
+        <section id="section-producao" class="section hidden">
+            <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">🍰 Nova Produção</h2>
+                
+                <form id="form-producao" class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Nome do Produto</label>
+                        <input type="text" id="nome-produto" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Ex: Trufas de Chocolate" required>
+                    </div>
+
+                    <div id="uso-insumos" class="space-y-4">
+                        <h3 class="text-lg font-semibold text-gray-700">Insumos Utilizados</h3>
+                        <div id="lista-uso-insumos">
+                            <!-- Lista de insumos para uso será inserida aqui -->
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Quantidade Produzida</label>
+                        <input type="number" id="quantidade-produzida" step="1" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="20" required>
+                    </div>
+
+                    <button type="submit" class="w-full bg-gradient-to-r from-secondary to-primary text-white font-bold py-3 px-6 rounded-lg hover:opacity-90 transition-opacity">
+                        🧮 Calcular Custos
+                    </button>
+                </form>
+            </div>
+
+            <!-- Resultado dos Cálculos -->
+            <div id="resultado-calculo" class="bg-white rounded-lg shadow-md p-6 hidden">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">💰 Resultado dos Cálculos</h3>
+                <div id="detalhes-calculo" class="space-y-3">
+                    <!-- Resultados serão inseridos aqui -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Histórico -->
+        <section id="section-historico" class="section hidden">
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-bold text-gray-800">📊 Histórico de Produções</h2>
+                    <button id="limpar-historico" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors">
+                        🗑️ Limpar Histórico
+                    </button>
+                </div>
+                <div id="lista-historico" class="space-y-4">
+                    <!-- Histórico será inserido aqui -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
