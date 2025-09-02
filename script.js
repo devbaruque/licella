@@ -3,7 +3,6 @@ class LicellaApp {
     constructor() {
         this.insumos = JSON.parse(localStorage.getItem('licella_insumos')) || [];
         this.historico = JSON.parse(localStorage.getItem('licella_historico')) || [];
-        console.log('Inicializando aplicação. Histórico carregado:', this.historico.length, 'itens');
         this.init();
     }
 
@@ -110,7 +109,6 @@ class LicellaApp {
         // Atualizar histórico quando entrar na seção de histórico
         if (section === 'historico') {
             this.renderHistorico();
-            console.log('Renderizando histórico. Total de itens:', this.historico.length);
         }
     }
 
@@ -228,10 +226,6 @@ class LicellaApp {
         this.renderInsumos();
 
         this.showMessage('Cálculo realizado com sucesso!', 'success');
-        
-        // Debug: verificar se foi salvo
-        console.log('Produção adicionada ao histórico:', producao);
-        console.log('Total de itens no histórico:', this.historico.length);
     }
 
     mostrarResultados(producao) {
@@ -517,7 +511,6 @@ class LicellaApp {
 
     saveHistorico() {
         localStorage.setItem('licella_historico', JSON.stringify(this.historico));
-        console.log('Histórico salvo no localStorage:', this.historico.length, 'itens');
     }
 }
 
